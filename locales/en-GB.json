@@ -1,0 +1,13 @@
+{
+	"manifest":
+	{
+		"MARVAL_TWEET": "Marval Tweet",
+		"DESCRIPTION": "Displays tweets."
+	},
+	"widget":
+	{
+		"MARVAL_TWEET": "Marval Tweet",
+		"SCREEN_NAME": "Screen Name",
+		"REQUIRED_SCREEN_NAME": "Screen Name is a required field."
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"Name": "MarvalSoftware.Widgets.MarvalTweet",
+	"Version": "1.0",
+	"DisplayName": "@@MARVAL_TWEET",
+	"Description": "@@DESCRIPTION",
+	"DefaultLocale": "en-GB",
+	"Icons":
+	{
+		"16": "images/twitter_16.png",
+		"128": "images/twitter_128.png"
+	},
+	"Scripts":
+	[
+		"MarvalTweet.js"
+	],
+	"StartupObject": "MarvalSoftware.Widgets.MarvalTweet",
+	"DefaultSize":
+	{
+		"Height": 222,
+		"Width": 400
+	},
+	"MinSize":
+	{
+		"Height": 118,
+		"Width": 400
+	},
+	"IsResizable": true
+}
