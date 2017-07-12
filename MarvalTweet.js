@@ -9,11 +9,13 @@ MarvalSoftware.Widgets.MarvalTweet = MarvalSoftware.UI.Controls.Widgets.TileWidg
     _chart: null,
     _callbackName: null,
     _sinceId: null,
+	_protocol: null,
     init: function () {
         /// <summary>
         /// Initialises a new instance of the MarvalTweet class.
         /// </summary>
 
+		this._protocol=window.location.protocol;
         MarvalSoftware.UI.Controls.Widgets.TileWidget.call(this, "MARVAL_TWEET", null, null, 30);
         this._scriptMethodProxy = new MarvalSoftware.Net.ScriptMethodProxy(MarvalSoftware.UI.WebHelper.getApplicationPath() + "/Ajax/AjaxService.asmx");
     },
@@ -117,7 +119,7 @@ MarvalSoftware.Widgets.MarvalTweet = MarvalSoftware.UI.Controls.Widgets.TileWidg
             // create inner tweet element
             var innerTweetElement = document.createElement("DIV");
             MarvalSoftware.UI.Dom.setStyles(innerTweetElement, this._styles.innerTweetElement);
-            MarvalSoftware.UI.Dom.setStyles(innerTweetElement, { backgroundImage: "url(\"" + marvalTweets[i].user.profile_image_url + "\")" });
+            MarvalSoftware.UI.Dom.setStyles(innerTweetElement, { backgroundImage: "url(\"" + (this._protocol==='https:' ? marvalTweets[i].user.profile_image_url_https : marvalTweets[i].user.profile_image_url) + "\")" });
             innerTweetElement.innerHTML = text;
             tweetElement.appendChild(innerTweetElement);
 
@@ -150,10 +152,10 @@ MarvalSoftware.Widgets.MarvalTweet = MarvalSoftware.UI.Controls.Widgets.TileWidg
             index_map[entry.indices[0]] = [entry.indices[1], function (text) { return "<a href='" + escapeHTML(entry.url) + "' style=\"color: " + textColour + "\" noDrag=\"true\">" + escapeHTML(text) + "</a>" } ]
         });
         each(tweet.entities.hashtags, function (i, entry) {
-            index_map[entry.indices[0]] = [entry.indices[1], function (text) { return "<a href='http://twitter.com/search/" + escape("#" + entry.text) + "' style=\"color: " + textColour + "\" noDrag=\"true\">" + escapeHTML(text) + "</a>" } ]
+            index_map[entry.indices[0]] = [entry.indices[1], function (text) { return "<a href='" + this._protocol + "//twitter.com/search/" + escape("#" + entry.text) + "' style=\"color: " + textColour + "\" noDrag=\"true\">" + escapeHTML(text) + "</a>" } ]
         });
         each(tweet.entities.user_mentions, function (i, entry) {
-            index_map[entry.indices[0]] = [entry.indices[1], function (text) { return "<a href='http://twitter.com/" + escapeHTML(entry.screen_name) + "' style=\"color: " + textColour + "\" noDrag=\"true\">" + escapeHTML(text) + "</a>" } ]
+            index_map[entry.indices[0]] = [entry.indices[1], function (text) { return "<a href='" + this._protocol + "//twitter.com/" + escapeHTML(entry.screen_name) + "' style=\"color: " + textColour + "\" noDrag=\"true\">" + escapeHTML(text) + "</a>" } ]
         });
         var result = "";
         var last_i = 0;
